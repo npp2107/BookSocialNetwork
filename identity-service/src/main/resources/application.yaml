@@ -10,6 +10,10 @@ openapi:
     title: Identity API Service
     version: 1.0.0
 
+app:
+  services:
+    profile: http://localhost:8081/profile
+
 spring:
   application:
     name: identity-service
