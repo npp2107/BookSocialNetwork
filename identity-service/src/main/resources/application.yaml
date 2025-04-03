@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /identity
+
+openapi:
+  service:
+    api-docs: api-service
+    server: http://localhost:8080/identity
+    title: API Service
+    version: 1.0.0
+
+spring:
+  application:
+    name: identity-service
+  datasource:
+    url: "jdbc:mysql://localhost:3306/identity_service"
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  signerKey: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
