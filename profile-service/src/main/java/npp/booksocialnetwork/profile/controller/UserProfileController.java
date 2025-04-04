@@ -2,7 +2,6 @@ package npp.booksocialnetwork.profile.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.*;
 
 import npp.booksocialnetwork.profile.dto.request.ProfileCreationRequest;
 import npp.booksocialnetwork.profile.dto.response.UserProfileResponse;
