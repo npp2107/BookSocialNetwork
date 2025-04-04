@@ -32,7 +32,7 @@ public class UserController {
             summary = "Create User",
             description = "API Create User"
     )
-    @PostMapping
+    @PostMapping("/registration")
     ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreationRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.createUser(request))

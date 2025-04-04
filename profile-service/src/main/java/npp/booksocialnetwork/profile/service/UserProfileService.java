@@ -1,5 +1,6 @@
 package npp.booksocialnetwork.profile.service;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import npp.booksocialnetwork.profile.dto.request.ProfileCreationRequest;
@@ -37,6 +38,7 @@ public class UserProfileService {
         return userProfileMapper.toUserProfileResponse(userProfile);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public List<UserProfileResponse> getAllProfiles() {
         var profiles = userProfileRepository.findAll();
 
