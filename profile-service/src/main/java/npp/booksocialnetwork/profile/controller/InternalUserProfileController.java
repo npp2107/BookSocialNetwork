@@ -1,5 +1,6 @@
 package npp.booksocialnetwork.profile.controller;
 
+import npp.booksocialnetwork.profile.dto.ApiResponse;
 import npp.booksocialnetwork.profile.dto.request.ProfileCreationRequest;
 import npp.booksocialnetwork.profile.dto.response.UserProfileResponse;
 import npp.booksocialnetwork.profile.service.UserProfileService;
@@ -17,7 +18,9 @@ public class InternalUserProfileController {
     UserProfileService userProfileService;
 
     @PostMapping("/internal/users")
-    UserProfileResponse createProfile(@RequestBody ProfileCreationRequest request) {
-        return userProfileService.createProfile(request);
+    ApiResponse<UserProfileResponse> createProfile(@RequestBody ProfileCreationRequest request) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.createProfile(request))
+                .build();
     }
 }

@@ -3,6 +3,7 @@ package npp.booksocialnetwork.profile.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import npp.booksocialnetwork.profile.dto.ApiResponse;
 import npp.booksocialnetwork.profile.dto.response.UserProfileResponse;
 import npp.booksocialnetwork.profile.service.UserProfileService;
 
@@ -25,12 +26,15 @@ public class UserProfileController {
 
     @Operation(summary = "Get Profile", description = "API Get Profile")
     @GetMapping("/users/{profileId}")
-    UserProfileResponse getProfile(@PathVariable String profileId) {
-        return userProfileService.getProfile(profileId);
+    ApiResponse<UserProfileResponse> getProfile(@PathVariable String profileId) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.getProfile(profileId))
+                .build();
     }
-
     @GetMapping("/users")
-    List<UserProfileResponse> getAllProfiles() {
-        return userProfileService.getAllProfiles();
+    ApiResponse<List<UserProfileResponse>> getAllProfiles() {
+        return ApiResponse.<List<UserProfileResponse>>builder()
+                .result(userProfileService.getAllProfiles())
+                .build();
     }
 }

@@ -1,5 +1,6 @@
 package npp.booksocialnetwork.identity.repository.httpclient;
 
+import npp.booksocialnetwork.identity.dto.request.ApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,5 +12,5 @@ import npp.booksocialnetwork.identity.dto.response.UserProfileResponse;
 @FeignClient(name = "profile-service", url = "${app.services.profile}")
 public interface ProfileClient {
     @PostMapping(value = "/internal/users", produces = MediaType.APPLICATION_JSON_VALUE)
-    UserProfileResponse createProfile(@RequestBody ProfileCreationRequest request);
+    ApiResponse<UserProfileResponse> createProfile(@RequestBody ProfileCreationRequest request);
 }
