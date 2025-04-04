@@ -1,6 +1,5 @@
 package npp.booksocialnetwork.identity.configuration;
 
-import java.text.ParseException;
 import java.util.Objects;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import npp.booksocialnetwork.identity.dto.request.IntrospectRequest;
 import npp.booksocialnetwork.identity.service.AuthenticationService;
-import com.nimbusds.jose.JOSEException;
 
 @Component
 public class CustomJwtDecoder implements JwtDecoder {
@@ -31,15 +29,10 @@ public class CustomJwtDecoder implements JwtDecoder {
 
     @Override
     public Jwt decode(String token) throws JwtException {
+        var response = authenticationService.introspect(
+                IntrospectRequest.builder().token(token).build());
 
-        try {
-            var response = authenticationService.introspect(
-                    IntrospectRequest.builder().token(token).build());
-
-            if (!response.isValid()) throw new JwtException("Token invalid");
-        } catch (JOSEException | ParseException e) {
-            throw new JwtException(e.getMessage());
-        }
+        if (!response.isValid()) throw new JwtException("Token invalid");
 
         if (Objects.isNull(nimbusJwtDecoder)) {
             SecretKeySpec secretKeySpec = new SecretKeySpec(signerKey.getBytes(), "HS512");
