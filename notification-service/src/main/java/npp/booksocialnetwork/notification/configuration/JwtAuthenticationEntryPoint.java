@@ -1,7 +1,7 @@
-package npp.booksocicalnetwork.profile.configuration;
+package npp.booksocialnetwork.notification.configuration;
 
-import npp.booksocicalnetwork.profile.dto.ApiResponse;
-import npp.booksocicalnetwork.profile.exception.ErrorCode;
+import npp.booksocialnetwork.notification.dto.ApiResponse;
+import npp.booksocialnetwork.notification.exception.ErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

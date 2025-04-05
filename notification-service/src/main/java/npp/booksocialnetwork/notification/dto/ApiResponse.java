@@ -1,4 +1,4 @@
-package npp.booksocicalnetwork.profile.dto;
+package npp.booksocialnetwork.notification.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;

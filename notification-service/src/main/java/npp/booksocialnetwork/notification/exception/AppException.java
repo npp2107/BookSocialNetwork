@@ -1,4 +1,4 @@
-package npp.booksocicalnetwork.profile.exception;
+package npp.booksocialnetwork.notification.exception;
 
 public class AppException extends RuntimeException {
 

@@ -1,6 +1,6 @@
-package npp.booksocicalnetwork.profile.exception;
+package npp.booksocialnetwork.notification.exception;
 
-import npp.booksocicalnetwork.profile.dto.ApiResponse;
+import npp.booksocialnetwork.notification.dto.ApiResponse;
 import jakarta.validation.ConstraintViolation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

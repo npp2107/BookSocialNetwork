@@ -1,4 +1,4 @@
-package npp.booksocicalnetwork.profile.configuration;
+package npp.booksocialnetwork.notification.configuration;
 
 import com.nimbusds.jwt.SignedJWT;
 import org.springframework.security.oauth2.jwt.Jwt;
