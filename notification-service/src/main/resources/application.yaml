@@ -2,6 +2,18 @@ server:
     port: 8082
     servlet:
         context-path: /notification
+
+openapi:
+    service:
+        api-docs: notification-api-service
+        server: http://localhost:8082/notification
+        title: Notification API Service
+        version: 1.0.0
+
+app:
+    brevo:
+        api-key: "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"
+
 spring:
     application:
         name: notification-service
