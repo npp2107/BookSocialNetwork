@@ -1,5 +1,6 @@
 package npp.booksocialnetwork.notification.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import npp.booksocialnetwork.notification.dto.ApiResponse;
 import npp.booksocialnetwork.notification.dto.request.SendEmailRequest;
 import npp.booksocialnetwork.notification.dto.response.EmailResponse;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
 public class EmailController {
     EmailService emailService;
 
