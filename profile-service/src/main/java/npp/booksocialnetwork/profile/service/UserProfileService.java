@@ -1,6 +1,9 @@
 package npp.booksocialnetwork.profile.service;
 
+import npp.booksocialnetwork.profile.exception.AppException;
+import npp.booksocialnetwork.profile.exception.ErrorCode;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import npp.booksocialnetwork.profile.dto.request.ProfileCreationRequest;
@@ -43,5 +46,16 @@ public class UserProfileService {
         var profiles = userProfileRepository.findAll();
 
         return profiles.stream().map(userProfileMapper::toUserProfileResponse).toList();
+    }
+
+
+    public UserProfileResponse getMyProfile() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+
+        var profile = userProfileRepository.findByUserId(userId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        return userProfileMapper.toUserProfileReponse(profile);
     }
 }
