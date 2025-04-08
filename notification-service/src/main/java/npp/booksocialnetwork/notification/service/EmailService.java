@@ -1,5 +1,6 @@
 package npp.booksocialnetwork.notification.service;
 
+import lombok.experimental.NonFinal;
 import npp.booksocialnetwork.notification.dto.request.EmailRequest;
 import npp.booksocialnetwork.notification.dto.request.SendEmailRequest;
 import npp.booksocialnetwork.notification.dto.request.Sender;
@@ -22,8 +23,9 @@ import java.util.List;
 public class EmailService {
     EmailClient emailClient;
 
-    @Value("${app.brevo.api-key}")
-    String apiKey = "";
+    @Value("${notification.email.brevo-apikey}")
+    @NonFinal
+    String apiKey;
 
     public EmailResponse sendEmail(SendEmailRequest request) {
         EmailRequest emailRequest = EmailRequest.builder()
