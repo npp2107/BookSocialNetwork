@@ -8,3 +8,9 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:root@localhost:27017/post-service?authSource=admin
+openapi:
+  service:
+    api-docs: post-api-service
+    server: http://localhost:8083/post
+    title: Post API Service
+    version: 1.0.0

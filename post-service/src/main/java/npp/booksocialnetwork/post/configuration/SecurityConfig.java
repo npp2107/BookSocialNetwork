@@ -20,6 +20,11 @@ public class SecurityConfig {
             "/internal/users"
     };
 
+    private static final String[] SWAGGER_ENDPOINTS = {
+            "/swagger-ui/**", "/v3/api-docs/**",
+    };
+
+
     private final CustomJwtDecoder customJwtDecoder;
 
     public SecurityConfig(CustomJwtDecoder customJwtDecoder) {
@@ -30,6 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS)
                 .permitAll()
+                .requestMatchers(SWAGGER_ENDPOINTS).permitAll()
                 .anyRequest()
                 .authenticated());
 
