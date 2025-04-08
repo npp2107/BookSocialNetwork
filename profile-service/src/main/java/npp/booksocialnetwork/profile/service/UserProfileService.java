@@ -56,6 +56,6 @@ public class UserProfileService {
         var profile = userProfileRepository.findByUserId(userId)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        return userProfileMapper.toUserProfileReponse(profile);
+        return userProfileMapper.toUserProfileResponse(profile);
     }
 }
