@@ -3,6 +3,7 @@ package npp.booksocialnetwork.identity.service;
 import java.util.HashSet;
 import java.util.List;
 
+import npp.booksocialnetwork.event.dto.NotificationEvent;
 import npp.booksocialnetwork.identity.mapper.ProfileMapper;
 import npp.booksocialnetwork.identity.repository.httpclient.ProfileClient;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -40,7 +41,7 @@ public class UserService {
     ProfileMapper profileMapper;
     PasswordEncoder passwordEncoder;
     ProfileClient profileClient;
-    KafkaTemplate<String, String> kafkaTemplate;
+    KafkaTemplate<String, Object> kafkaTemplate;
 
     public UserResponse createUser(UserCreationRequest request) {
         User user = userMapper.toUser(request);
@@ -63,8 +64,14 @@ public class UserService {
 
         var profile = profileClient.createProfile(profileRequest);
 
-        // Publish message to kafka
-        kafkaTemplate.send("onboard-successful", "Welcome our new member " + user.getUsername());
+        NotificationEvent notificationEvent = NotificationEvent.builder()
+                .channel("EMAIL")
+                .recipient(request.getEmail())
+                .subject("Welcome to npp_bsn")
+                .body("Hello, " + request.getUsername())
+                .build();
+
+        kafkaTemplate.send("notification-delivery", notificationEvent);
 
         var userCreationReponse = userMapper.toUserResponse(user);
         userCreationReponse.setId(profile.getResult().getId());
