@@ -31,6 +31,8 @@ public class UserProfileController {
                 .result(userProfileService.getProfile(profileId))
                 .build();
     }
+
+    @Operation(summary = "Get All Profiles", description = "API Get All Profiles")
     @GetMapping("/users")
     ApiResponse<List<UserProfileResponse>> getAllProfiles() {
         return ApiResponse.<List<UserProfileResponse>>builder()
