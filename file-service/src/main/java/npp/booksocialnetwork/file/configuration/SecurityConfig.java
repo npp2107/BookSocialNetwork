@@ -15,8 +15,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
-    private static final String[] PUBLIC_ENDPOINTS = {};
+    private static final String[] PUBLIC_ENDPOINTS = {
+            "/media/upload"
+    };
 
     private static final String[] SWAGGER_ENDPOINTS = {
             "/swagger-ui/**", "/v3/api-docs/**",
