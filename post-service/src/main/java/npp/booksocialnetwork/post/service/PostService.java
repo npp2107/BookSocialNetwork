@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
@@ -25,6 +26,7 @@ public class PostService {
     PostRepository postRepository;
     PostMapper postMapper;
 
+    @Transactional
     public PostResponse createPost(PostRequest request){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

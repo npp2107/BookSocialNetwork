@@ -15,6 +15,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ public class RoleService {
     PermissionRepository permissionRepository;
     RoleMapper roleMapper;
 
+    @Transactional
     public RoleResponse create(RoleRequest request) {
         var role = roleMapper.toRole(request);
 
@@ -39,6 +41,7 @@ public class RoleService {
         return roleRepository.findAll().stream().map(roleMapper::toRoleResponse).toList();
     }
 
+    @Transactional
     public void delete(String role) {
         roleRepository.deleteById(role);
     }
