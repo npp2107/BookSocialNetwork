@@ -1,14 +1,17 @@
 package npp.booksocialnetwork.post.service;
 
+import lombok.extern.slf4j.Slf4j;
 import npp.booksocialnetwork.post.dto.PageResponse;
 import npp.booksocialnetwork.post.dto.request.PostRequest;
 import npp.booksocialnetwork.post.dto.response.PostResponse;
+import npp.booksocialnetwork.post.dto.response.UserProfileResponse;
 import npp.booksocialnetwork.post.entity.Post;
 import npp.booksocialnetwork.post.mapper.PostMapper;
 import npp.booksocialnetwork.post.repository.PostRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import npp.booksocialnetwork.post.repository.httpclient.ProfileClient;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -26,6 +30,7 @@ public class PostService {
     DateTimeFormatter dateTimeFormatter;
     PostRepository postRepository;
     PostMapper postMapper;
+    ProfileClient profileClient;
 
     @Transactional
     public PostResponse createPost(PostRequest request){
@@ -46,13 +51,24 @@ public class PostService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
 
+        UserProfileResponse userProfile = null;
+
+        try {
+            userProfile = profileClient.getProfile(userId).getResult();
+        } catch (Exception e) {
+            log.error("Error while getting user profile", e);
+        }
+
         Sort sort = Sort.by("createdDate").descending();
         Pageable pageable = PageRequest.of(page - 1, size, sort);
         var pageData = postRepository.findAllByUserId(userId, pageable);
 
+        String username = userProfile != null ? userProfile.getUsername() : null;
+
         var postList = pageData.getContent().stream().map(post -> {
             var postResponse = postMapper.toPostResponse(post);
             postResponse.setCreated(dateTimeFormatter.format(post.getCreatedDate()));
+            postResponse.setUsername(username);
             return postResponse;
         }).toList();
 

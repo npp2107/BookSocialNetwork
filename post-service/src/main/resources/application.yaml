@@ -14,3 +14,7 @@ openapi:
     server: http://localhost:8083/post
     title: Post API Service
     version: 1.0.0
+app:
+  services:
+    profile:
+      url: http://localhost:8081/profile
