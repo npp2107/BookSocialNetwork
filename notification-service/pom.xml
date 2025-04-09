@@ -157,10 +157,10 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>npp/booksocicalnetwork/profile/dto/**</exclude>
-                        <exclude>npp/booksocicalnetwork/profile/entity/**</exclude>
-                        <exclude>npp/booksocicalnetwork/profile/mapper/**</exclude>
-                        <exclude>npp/booksocicalnetwork/profile/configuration/**</exclude>
+                        <exclude>npp/booksocicalnetwork/notification/dto/**</exclude>
+                        <exclude>npp/booksocicalnetwork/notification/entity/**</exclude>
+                        <exclude>npp/booksocicalnetwork/notification/mapper/**</exclude>
+                        <exclude>npp/booksocicalnetwork/notification/configuration/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
