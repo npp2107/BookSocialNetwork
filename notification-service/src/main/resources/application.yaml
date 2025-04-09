@@ -10,10 +10,6 @@ openapi:
         title: Notification API Service
         version: 1.0.0
 
-notification:
-    email:
-        brevo-url: https://api.brevo.com
-        brevo-apikey: "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"
 spring:
     application:
         name: notification-service
@@ -29,3 +25,5 @@ spring:
             value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
             properties:
                 spring.json.trusted.packages: "*"
+    config:
+        import: classpath:brevo-config.yaml
