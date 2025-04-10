@@ -1,6 +1,9 @@
 package npp.booksocialnetwork.file.service;
 
+import npp.booksocialnetwork.file.dto.response.FileData;
 import npp.booksocialnetwork.file.dto.response.FileResponse;
+import npp.booksocialnetwork.file.exception.AppException;
+import npp.booksocialnetwork.file.exception.ErrorCode;
 import npp.booksocialnetwork.file.mapper.FileMgmtMapper;
 import npp.booksocialnetwork.file.repository.FileMgmtRepository;
 import npp.booksocialnetwork.file.repository.FileRepository;
@@ -37,5 +40,14 @@ public class FileService {
                 .originalFileName(file.getOriginalFilename())
                 .url(fileInfo.getUrl())
                 .build();
+    }
+
+    public FileData download(String fileName) throws IOException {
+        var fileMgmt = fileMgmtRepository.findById(fileName).orElseThrow(
+                () -> new AppException(ErrorCode.FILE_NOT_FOUND));
+
+        var resource = fileRepository.read(fileMgmt);
+
+        return new FileData(fileMgmt.getContentType(), resource);
     }
 }
