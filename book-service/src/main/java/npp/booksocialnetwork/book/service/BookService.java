@@ -31,7 +31,10 @@ public class BookService {
     public BookResponse createBook (BookRequest bookRequest){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         var isAdminRole = authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().contains(PredefinedRole.ADMIN_ROLE));
+
         var book = bookMapper.toBook(bookRequest);
+        book.setCreatedByUserId(authentication.getName());
+
         if (isAdminRole)
             book.setProposalStatus(ProposalStatusCode.APPROVED.getValue());
         else

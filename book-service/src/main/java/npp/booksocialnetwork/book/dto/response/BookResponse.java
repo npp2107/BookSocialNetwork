@@ -3,6 +3,7 @@ package npp.booksocialnetwork.book.dto.response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -41,6 +42,6 @@ public class BookResponse{
     private Integer proposalStatus;
     private List<String> relatedBookIds;
 
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
 }
